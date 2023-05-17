@@ -14,6 +14,17 @@ class NivelesSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $data = array(
+            [
+                'nivel' => 'basico'
+            ],
+            [
+                'nivel' => 'gerente'
+            ],
+            [
+                'nivel' => 'administrador'
+            ]
+        );
+        DB::table('niveles')->insert($data);
     }
 }
