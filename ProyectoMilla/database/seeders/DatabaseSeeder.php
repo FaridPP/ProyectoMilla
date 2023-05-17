@@ -20,5 +20,19 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+            CategoriasSeeder::class,
+            BodegasSeeder::class,
+            MarcasSeeder::class,
+            ProveedoressSeeder::class,
+            ProductosSeeder::class,
+            MarcasProductosSeeder::class,
+            BodegasProductosSeeder::class,
+            EntradasSeeder::class,
+            SalidasSeeder::class,
+            NivelesSeeder::class,
+            UsuariosSeeder::class
+        ]);
     }
 }

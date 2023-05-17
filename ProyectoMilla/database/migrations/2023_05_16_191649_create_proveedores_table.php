@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('codigo');
             $table->string('nombre',100);
             $table->string('contacto',100);
+            $table->string('telefono',8);
         });
     }
 
