@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Marca extends Model
 {
     use HasFactory;
+
+    //Nombre de la tabla
+    protected $table = 'marcas';
+
+    //Llave primaria de mi tabla
+    protected $primaryKey = 'codigo';
+
+    //Campos de la tabla 
+    protected $fillable = ['nombre'];
 }
