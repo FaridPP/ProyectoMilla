@@ -44,10 +44,10 @@
 
                             <div class="col-md-6">
                                 {{-- <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role" autofocus> --}}
-                                <select id="inputRole" class="form-control">
-                                    <option selected>Basico</option>
-                                    <option>Gerente</option>
-                                    <option>Admin</option>
+                                <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required >
+                                    <option value="basic" selected>Basico</option>
+                                    <option value="analyst">Analista</option>
+                                    <option value="admin">Administrador</option>
                                 </select>
 
                                 @error('role')

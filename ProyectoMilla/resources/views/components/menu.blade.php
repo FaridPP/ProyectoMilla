@@ -21,32 +21,49 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
+                        <li>
+                            <a class="nav-link" href="{{route('register')}}">{{__('Register')}}</a>
+                        </li>
                     @endif
 
                 @else
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                  </li>
-                  <li class="nav-item">
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/products/show">Productos</a>
-                  </li>
+                </li>
+                @if (Auth::user()->role == "admin" or Auth::user()->role == "analyst" )
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} ({{Auth::user()->role}})
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Generar reporte
+                        </a>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Existencias de productos por bodega</a></li>
+                        <li><a class="dropdown-item" href="#">Historial de entradas por bodega</a></li>
+                        <li><a class="dropdown-item" href="#">Historial de salidas por bodega</a></li>
+                        <li><a class="dropdown-item" href="#">Listado de productos por categoría</a></li>
+                        <li><a class="dropdown-item" href="#">Listado de productos por marcas</a></li>
+                        </ul>
+                    </li>
+                @endif
+                 <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} ({{Auth::user()->role}})
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
                 @endguest
             </ul>
         </div>
