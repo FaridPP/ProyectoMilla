@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{asset('img/faviconmilla.ico')}}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -26,5 +27,9 @@
             @yield('content')
         </main>
     </div>
+
+    <hr>
+    <footer class="text-center">Todos los derechos reservados © GrupoMilla 2023</footer>
 </body>
+@yield('scripts')
 </html>

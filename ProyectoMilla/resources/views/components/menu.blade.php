@@ -31,11 +31,19 @@
                     <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/products/show">Productos</a>
+                    <a class="nav-link active" href="/products/show">Productos</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/products/show">Bodegas</a>
+                </li>
+                @if (Auth::user()->role == "admin")
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Gestionar</a>
+                    </li>
+                @endif
                 @if (Auth::user()->role == "admin" or Auth::user()->role == "analyst" )
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Generar reporte
                         </a>
                         <ul class="dropdown-menu">

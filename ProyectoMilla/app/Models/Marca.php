@@ -9,6 +9,8 @@ class Marca extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     //Nombre de la tabla
     protected $table = 'marcas';
 

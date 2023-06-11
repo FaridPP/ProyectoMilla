@@ -22,6 +22,10 @@ class MarcasProductosSeeder extends Seeder
                 'id_marca' => '1'
             ],
             [
+                'id_producto' => '1',
+                'id_marca' => '2'
+            ],
+            [
                 'id_producto' => '2',
                 'id_marca' => '1'
             ],

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Marca;
 use App\Models\Product;
+use App\Models\Categoria;
+use Illuminate\Http\Request;
+use App\Models\MarcaProducto;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ProducController extends Controller
 {
@@ -19,17 +23,26 @@ class ProducController extends Controller
             "productos.codigo",
             "productos.nombre",
             "productos.precio",
-            "categoria.nombre as categoria"
-        )->join("categoria", "categoria.codigo", "=", "productos.categoria")->get();
+            "categorias.nombre as categoria",
+        )->join("categorias", "categorias.codigo", "=", "productos.id_categoria")->get();
+        
+        foreach ($productos as $producto) {
+            $marcas = MarcaProducto::select("marcas.nombre as marca")
+            ->join("marcas","marcas.codigo","=","marcasproductos.id_marca")
+            ->where("marcasproductos.id_producto","=",$producto->codigo)
+            ->pluck("marca")->toArray();
 
+            $producto->marcas = implode(", ", $marcas);
+        }
         return view('/products/show')->with(['productos' => $productos]);
     }
 
     public function create()
     {
-        $categoria = Branch::all();
+        $categoria = Categoria::all();
+        $marca = Marca::all();
 
-        return view('/products/create')->with(['categoria' => $categoria]);
+        return view('/products/create')->with(['categoria' => $categoria, 'marca'=>$marca]);
     }
 
     public function store(Request $request)
@@ -38,10 +51,21 @@ class ProducController extends Controller
         $data = request()->validate([
             'nombre' => 'required',
             'precio' => 'required',
-            'categoria' => 'required'
+            'id_categoria' => 'required'
+        ]);
+        $marcas = request()->validate([
+            'marca' => 'required | array',
+            'marca.*' => 'exists:marcas,codigo',
         ]);
 
-        Product::create($data);
+        $Product = Product::create($data);
+
+        foreach ($marcas['marca'] as $marcaId) {
+            $Marcaproducto = new MarcaProducto();
+            $Marcaproducto->id_producto = $Product->codigo;
+            $Marcaproducto->id_marca = $marcaId;
+            $Marcaproducto->save();
+        }
 
         return redirect('/products/show');
     }
@@ -49,10 +73,11 @@ class ProducController extends Controller
     public function edit(Product $product)
     {
         //Listar las marcas
-        $categoria = Branch::all();
+        $categoria = Categoria::all();
+        $marca = Marca::all();
 
         //Mostrar la vista
-        return view('products/update')->with(['categoria' => $categoria, 'producto' => $product]);
+        return view('products/update')->with(['categoria' => $categoria, 'producto' => $product,'marca'=>$marca]);
     }
 
     public function update(Request $request, Product $product)
@@ -61,13 +86,16 @@ class ProducController extends Controller
         $data = request()->validate([
             'nombre' => 'required',
             'precio' => 'required',
-            'categoria' => 'required'
+            'id_categoria' => 'required'
+        ]);
+        $marcas = request()->validate([
+            'marca' => 'required | array',
+            'marca.*' => 'exists:marcas,codigo',
         ]);
 
         $product->nombre = $data['nombre'];
         $product->precio = $data['precio'];
         $product->categoria = $data['categoria'];
-        $product->updated_at = now();
 
         //Guardar la informacion (actualizar)
         $product->save();
@@ -78,8 +106,10 @@ class ProducController extends Controller
 
     public function destroy($id)
     {
+        MarcaProducto::where('id_producto', $Id)->delete();
         Product::destroy($id);
 
         return response()->json(array('res' => true));
+        
     }
 }
