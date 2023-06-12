@@ -14,6 +14,9 @@ class BodegaProducto extends Model
     //Nombre de la tabla
     protected $table = 'bodegasproductos';
 
+    //Llave primaria de mi tabla
+    protected $primaryKey = 'codigo';
+
     //Campos de la tabla 
     protected $fillable = ['id_producto', 'id_bodega', 'cantidad'];
 }

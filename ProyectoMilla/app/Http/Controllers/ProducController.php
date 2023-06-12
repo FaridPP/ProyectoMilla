@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Marca;
+use App\Models\Salida;
+use App\Models\Entrada;
 use App\Models\Product;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\MarcaProducto;
+use App\Models\BodegaProducto;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -74,10 +77,14 @@ class ProducController extends Controller
     {
         //Listar las marcas
         $categoria = Categoria::all();
-        $marca = Marca::all();
+        $marcas = Marca::all();
+        $marca = MarcaProducto::select("marcas.codigo as codigo","marcas.nombre as marca")
+        ->join("marcas","marcas.codigo","=","marcasproductos.id_marca")
+        ->where("marcasproductos.id_producto","=",$product->codigo)
+        ->get();
 
         //Mostrar la vista
-        return view('products/update')->with(['categoria' => $categoria, 'producto' => $product,'marca'=>$marca]);
+        return view('products/update')->with(['categoria' => $categoria, 'producto' => $product,'marca'=>$marca,'marcas'=>$marcas]);
     }
 
     public function update(Request $request, Product $product)
@@ -95,18 +102,28 @@ class ProducController extends Controller
 
         $product->nombre = $data['nombre'];
         $product->precio = $data['precio'];
-        $product->categoria = $data['categoria'];
+        $product->id_categoria = $data['id_categoria'];
 
-        //Guardar la informacion (actualizar)
+        
+        MarcaProducto::where('id_producto', $product->codigo)->delete();
+        foreach ($marcas['marca'] as $marcaId) {
+            $Marcaproducto = new MarcaProducto();
+            $Marcaproducto->id_producto = $product->codigo;
+            $Marcaproducto->id_marca = $marcaId;
+            $Marcaproducto->save();
+        }
         $product->save();
+        
 
-        //Redireccionar 
         return redirect('/products/show');
     }
 
     public function destroy($id)
     {
-        MarcaProducto::where('id_producto', $Id)->delete();
+        Entrada::where('id_producto', $id)->delete();
+        Salida::where('id_producto', $id)->delete();
+        BodegaProducto::where('id_producto', $id)->delete();
+        MarcaProducto::where('id_producto', $id)->delete();
         Product::destroy($id);
 
         return response()->json(array('res' => true));

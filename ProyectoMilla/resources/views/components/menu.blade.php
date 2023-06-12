@@ -34,13 +34,27 @@
                     <a class="nav-link active" href="/products/show">Productos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/products/show">Bodegas</a>
+                    <a class="nav-link active" href="/bodegas/show">Bodegas</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/proveedores/show">Proveedores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/marcas/show">Marcas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/entradas/show">Entradas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/salidas/show">Salidas</a>
+                </li>
+                
                 @if (Auth::user()->role == "admin")
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Gestionar</a>
+                    <li>
+                        <a class="nav-link active" href="{{route('register')}}">Registrar empleado</a>
                     </li>
                 @endif
+                
                 @if (Auth::user()->role == "admin" or Auth::user()->role == "analyst" )
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

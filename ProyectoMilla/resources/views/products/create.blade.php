@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center">Producto</h1>
+    <h1 class="text-center">Inventario</h1>
     <h5 class="text-center">Formulario para crear producto</h5>
     <hr>
     <br>

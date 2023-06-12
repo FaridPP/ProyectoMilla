@@ -30,8 +30,7 @@ class DatabaseSeeder extends Seeder
             MarcasProductosSeeder::class,
             BodegasProductosSeeder::class,
             EntradasSeeder::class,
-            SalidasSeeder::class,
-            UsuariosSeeder::class
+            SalidasSeeder::class
         ]);
     }
 }
