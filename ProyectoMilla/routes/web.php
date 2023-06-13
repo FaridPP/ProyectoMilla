@@ -27,93 +27,93 @@ Route::get('/home', function () {
 /* Rutas productos */
 Route::get('products/show', [ProducController::class, 'index']);
 
-Route::get('products/create',[ProducController::class, 'create']);
+Route::get('products/create',[ProducController::class, 'create'])->middleware('admin');
 
-Route::post('/products/store', [ProducController::class, 'store']);
+Route::post('/products/store', [ProducController::class, 'store'])->middleware('admin');
 
-Route::get('/products/edit/{product}', [ProducController::class, 'edit']);
+Route::get('/products/edit/{product}', [ProducController::class, 'edit'])->middleware('admin');
 
-Route::put('/products/update/{product}', [ProducController::class, 'update']);
+Route::put('/products/update/{product}', [ProducController::class, 'update'])->middleware('admin');
 
-Route::delete('/products/destroy/{id}', [ProducController::class, 'destroy']);
+Route::delete('/products/destroy/{id}', [ProducController::class, 'destroy'])->middleware('admin');
 
 /* Rutas bodegas */
 
 Route::get('bodegas/show', [BodegaController::class, 'index']);
 
-Route::get('bodegas/create',[BodegaController::class, 'create']);
+Route::get('bodegas/create',[BodegaController::class, 'create'])->middleware('admin');
 
 Route::match(['get', 'post'], '/bodegas/content', [BodegaController::class, 'show']);
 
-Route::get('/bodegas/content/edit/{bodega}', [BodegaController::class, 'content_edit']);
+Route::get('/bodegas/content/edit/{bodega}', [BodegaController::class, 'content_edit'])->middleware('admin');
 
-Route::put('/bodegas/content/update/{bodega}', [BodegaController::class, 'content_update']);
+Route::put('/bodegas/content/update/{bodega}', [BodegaController::class, 'content_update'])->middleware('admin');
 
-Route::delete('/bodegas/content/destroy/{id}', [BodegaController::class, 'content_destroy']);
+Route::delete('/bodegas/content/destroy/{id}', [BodegaController::class, 'content_destroy'])->middleware('admin');
 
-Route::post('/bodegas/store', [BodegaController::class, 'store']);
+Route::post('/bodegas/store', [BodegaController::class, 'store'])->middleware('admin');
 
-Route::get('/bodegas/edit/{bodega}', [BodegaController::class, 'edit']);
+Route::get('/bodegas/edit/{bodega}', [BodegaController::class, 'edit'])->middleware('admin');
 
-Route::put('/bodegas/update/{bodega}', [BodegaController::class, 'update']);
+Route::put('/bodegas/update/{bodega}', [BodegaController::class, 'update'])->middleware('admin');
 
-Route::delete('/bodegas/destroy/{id}', [BodegaController::class, 'destroy']);
+Route::delete('/bodegas/destroy/{id}', [BodegaController::class, 'destroy'])->middleware('admin');
 
 /* Rutas marcas */
 
 Route::get('marcas/show', [MarcaController::class, 'index']);
 
-Route::get('marcas/create',[MarcaController::class, 'create']);
+Route::get('marcas/create',[MarcaController::class, 'create'])->middleware('admin');
 
-Route::post('/marcas/store', [MarcaController::class, 'store']);
+Route::post('/marcas/store', [MarcaController::class, 'store'])->middleware('admin');
 
-Route::get('/marcas/edit/{marca}', [MarcaController::class, 'edit']);
+Route::get('/marcas/edit/{marca}', [MarcaController::class, 'edit'])->middleware('admin');
 
-Route::put('/marcas/update/{marca}', [MarcaController::class, 'update']);
+Route::put('/marcas/update/{marca}', [MarcaController::class, 'update'])->middleware('admin');
 
-Route::delete('/marcas/destroy/{id}', [MarcaController::class, 'destroy']);
+Route::delete('/marcas/destroy/{id}', [MarcaController::class, 'destroy'])->middleware('admin');
 
 /* Rutas proveedores */
 
 Route::get('/proveedores/show', [ProveedorController::class, 'index']);
 
-Route::get('/proveedores/create',[ProveedorController::class, 'create']);
+Route::get('/proveedores/create',[ProveedorController::class, 'create'])->middleware('admin');
 
-Route::post('/proveedores/store', [ProveedorController::class, 'store']);
+Route::post('/proveedores/store', [ProveedorController::class, 'store'])->middleware('admin');
 
-Route::get('/proveedores/edit/{proveedor}', [ProveedorController::class, 'edit']);
+Route::get('/proveedores/edit/{proveedor}', [ProveedorController::class, 'edit'])->middleware('admin');
 
-Route::put('/proveedores/update/{proveedor}', [ProveedorController::class, 'update']);
+Route::put('/proveedores/update/{proveedor}', [ProveedorController::class, 'update'])->middleware('admin');
 
-Route::delete('/proveedores/destroy/{id}', [ProveedorController::class, 'destroy']);
+Route::delete('/proveedores/destroy/{id}', [ProveedorController::class, 'destroy'])->middleware('admin');
 
 /* Rutas entradas */
 
 Route::get('/entradas/show', [EntradaController::class, 'index']);
 
-Route::get('/entradas/create',[EntradaController::class, 'create']);
+Route::get('/entradas/create',[EntradaController::class, 'create'])->middleware('admin');
 
-Route::post('/entradas/store', [EntradaController::class, 'store']);
+Route::post('/entradas/store', [EntradaController::class, 'store'])->middleware('admin');
 
-Route::get('/entradas/edit/{entrada}', [EntradaController::class, 'edit']);
+Route::get('/entradas/edit/{entrada}', [EntradaController::class, 'edit'])->middleware('admin');
 
-Route::put('/entradas/update/{entrada}', [EntradaController::class, 'update']);
+Route::put('/entradas/update/{entrada}', [EntradaController::class, 'update'])->middleware('admin');
 
-Route::delete('/entradas/destroy/{id}', [EntradaController::class, 'destroy']);
+Route::delete('/entradas/destroy/{id}', [EntradaController::class, 'destroy'])->middleware('admin');
 
 /* Rutas salidas */
 
 Route::get('/salidas/show', [SalidaController::class, 'index']);
 
-Route::get('/salidas/create',[SalidaController::class, 'create']);
+Route::get('/salidas/create',[SalidaController::class, 'create'])->middleware('admin');
 
-Route::post('/salidas/store', [SalidaController::class, 'store']);
+Route::post('/salidas/store', [SalidaController::class, 'store'])->middleware('admin');
 
-Route::get('/salidas/edit/{salida}', [SalidaController::class, 'edit']);
+Route::get('/salidas/edit/{salida}', [SalidaController::class, 'edit'])->middleware('admin');
 
-Route::put('/salidas/update/{salida}', [SalidaController::class, 'update']);
+Route::put('/salidas/update/{salida}', [SalidaController::class, 'update'])->middleware('admin');
 
-Route::delete('/salidas/destroy/{id}', [SalidaController::class, 'destroy']);
+Route::delete('/salidas/destroy/{id}', [SalidaController::class, 'destroy'])->middleware('admin');
 
 
 Auth::routes();
