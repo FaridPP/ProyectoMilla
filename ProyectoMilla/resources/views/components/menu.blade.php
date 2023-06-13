@@ -49,12 +49,6 @@
                     <a class="nav-link active" href="/salidas/show">Salidas</a>
                 </li>
                 
-                @if (Auth::user()->role == "admin")
-                    <li>
-                        <a class="nav-link active" href="{{route('register')}}">Registrar empleado</a>
-                    </li>
-                @endif
-                
                 @if (Auth::user()->role == "admin" or Auth::user()->role == "analyst" )
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
