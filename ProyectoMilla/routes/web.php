@@ -43,6 +43,14 @@ Route::get('bodegas/show', [BodegaController::class, 'index']);
 
 Route::get('bodegas/create',[BodegaController::class, 'create']);
 
+Route::match(['get', 'post'], '/bodegas/content', [BodegaController::class, 'show']);
+
+Route::get('/bodegas/content/edit/{bodega}', [BodegaController::class, 'content_edit']);
+
+Route::put('/bodegas/content/update/{bodega}', [BodegaController::class, 'content_update']);
+
+Route::delete('/bodegas/content/destroy/{id}', [BodegaController::class, 'content_destroy']);
+
 Route::post('/bodegas/store', [BodegaController::class, 'store']);
 
 Route::get('/bodegas/edit/{bodega}', [BodegaController::class, 'edit']);

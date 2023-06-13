@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bodega extends Model
 {
@@ -19,4 +20,5 @@ class Bodega extends Model
 
     //Campos de la tabla 
     protected $fillable = ['nombre', 'ubicacion'];
+
 }

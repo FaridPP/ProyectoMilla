@@ -8,6 +8,21 @@
     <div class="container">
         <div>
             <a class="btn btn-primary" href="/bodegas/create">Agregar bodega</a> 
+            <form class="row row-cols-lg-auto g-3 align-items-center" style="margin-top: 10px;" action="/bodegas/content/" method="POST">
+                @csrf
+                <div class="col-12">
+                    <label class="visually-hidden" for="inlineFormSelectPref">Bodegas</label>
+                    <select class="form-select" id="inlineFormSelectPref" name="id_bodegas">
+                        @foreach ($bodegas as $item)
+                        <option value="{{$item->codigo}}">{{$item->nombre}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Ver</button>
+                  </div>
+            </form>
         </div>
         <section style="margin-top: 20px;">
             <table class="table">

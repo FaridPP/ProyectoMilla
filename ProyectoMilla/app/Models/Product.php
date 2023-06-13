@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Bodega;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -19,4 +20,6 @@ class Product extends Model
 
     //Campos de la tabla 
     protected $fillable = ['nombre', 'id_categoria', 'precio'];
+
+
 }
